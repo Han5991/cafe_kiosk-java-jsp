@@ -100,11 +100,11 @@ public class WebChatServer extends HttpServlet {
 	};
 
 	function onMessage(e) {
-		var chatMsg = event.data;
+		var data = event.data;
 
-		var chatMsgs = chatMsg.split(",");
+		var datas = data.split(",");
 
-		var $chat = "<li class='oderNum'>주문번호 : "
+		var $data1 = "<li class='oderNum'>주문번호 : "
 				+ chatMsgs[chatMsgs.length - 4]
 				+ "<input name='oderNum' type='hidden' value='"+chatMsgs[chatMsgs.length-4]+"'> <br> 주문시각 : "
 				+ chatMsgs[chatMsgs.length - 3]
@@ -112,16 +112,16 @@ public class WebChatServer extends HttpServlet {
 				+ chatMsgs[chatMsgs.length - 1]
 				+ "<br> <input type='button' value='주문목록 보기' class='oderdetail'><table class='detail'>";
 
-		var $chat2 = ""
-		for (var i = 0; i < chatMsgs.length - 4; i++) {
-			$chat2 += "<tr><td>" + chatMsgs[i] + "</td><td>" + chatMsgs[++i]
+		var $data2 = ""
+		for (var i = 0; i < datas.length - 4; i++) {
+			$data2 += "<tr><td>" + datas[i] + "</td><td>" + datas[++i]
 					+ "</td></tr>";
 		}
 
-		var $chat3 = "</table><p>총계 : " + chatMsgs[chatMsgs.length - 2]
+		var $data3 = "</table><p>총계 : " + datas[chatMsgs.length - 2]
 				+ "원</li>";
 
-		$('#ul').append($chat + $chat2 + $chat3);
+		$('#ul').append($data1 + $data2 + $data3);
 
 		$('.oderNum').click(function() {
 			var n = $('.oderNum').index(this);
@@ -175,8 +175,8 @@ public class WebChatServer extends HttpServlet {
 		alert(e.data);
 	}
 	function send() {
-		var chatMsg = $('input[name=odernum]').val();
-		webSocket.send(chatMsg);
+		var order = $('input[name=odernum]').val();
+		webSocket.send(order);
 	}
 	$('#btn-submit').click(function() {
 		send();
